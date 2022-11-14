@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:flutterboot/providers/items.dart';
+import 'package:provider/provider.dart';
+
+class ListScreen extends StatelessWidget {
+  const ListScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final itemsProvider = context.watch<Items>();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter-Boot'),
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.brown,
+        child: FutureBuilder(
+          future: itemsProvider.items(),
+          builder: (ctx, snap) {
+            final bool loaded = snap.connectionState == ConnectionState.done;
+            final items = loaded ? snap.data! : [];
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: items.length,
+              itemBuilder: (ctx, idx) {
+                return Card(
+                  elevation: 8,
+                  color: Colors.orangeAccent,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      items[idx].value ?? "<no-value>",
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
