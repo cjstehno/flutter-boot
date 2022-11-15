@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterboot/dialogs/add_item_dialog.dart';
 import 'package:flutterboot/providers/items.dart';
 import 'package:provider/provider.dart';
 
@@ -28,16 +29,20 @@ class ListScreen extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (ctx, idx) {
                 return Card(
-                  elevation: 8,
+                  elevation: 6,
                   color: Colors.orangeAccent,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(8.0),
+                    title: Text(
                       items[idx].value ?? "<no-value>",
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    trailing: IconButton(
+                      onPressed: () => itemsProvider.removeItem(items[idx].id),
+                      icon: const Icon(Icons.delete_outline),
                     ),
                   ),
                 );
@@ -45,6 +50,17 @@ class ListScreen extends StatelessWidget {
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: ()=> showDialog(
+            context: context,
+            builder: (ctx) => const AddItemDialog(),
+          ).then((value) {
+            if (value != null) {
+              itemsProvider.addItem(value);
+            }
+          }),
       ),
     );
   }

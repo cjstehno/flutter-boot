@@ -50,6 +50,7 @@ public class ItemController {
 
     @PostMapping("/api/items")
     public Item saveItem(@RequestBody final Item item) {
+        log.info("Saving item: {}", item);
         val newItem = new Item(randomUUID().toString(), item.getValue());
         items.add(newItem);
         return newItem;

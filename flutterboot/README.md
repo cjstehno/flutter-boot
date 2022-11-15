@@ -1,16 +1,15 @@
-# flutterboot
+# FlutterBoot - UI
 
-A new Flutter project.
+This is the Flutter-based web UI client for the FlutterBoot app.
 
-## Getting Started
+## Running Tests
 
-This project is a starting point for a Flutter application.
+    flutter test
 
-A few resources to get you started if this is your first Flutter project:
+## Building
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    flutter build
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Publish to Server
+
+    TBD
